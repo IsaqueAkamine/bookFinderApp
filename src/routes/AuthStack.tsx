@@ -1,6 +1,7 @@
 import * as React from 'react';
 // import {View, Text} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import type {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {Login, SignUp} from '../screens';
 
@@ -12,7 +13,18 @@ import {Login, SignUp} from '../screens';
 //   );
 // }
 
-const Stack = createNativeStackNavigator();
+export type AuthStackParamList = {
+  Login: undefined;
+  SignUp: undefined;
+  // Home: undefined;
+  // Profile: { userId: string };
+  // Feed: { sort: 'latest' | 'top' } | undefined;
+};
+
+export type LoginScreenNavigationProp =
+  NativeStackNavigationProp<AuthStackParamList>;
+
+const Stack = createNativeStackNavigator<AuthStackParamList>();
 
 function AuthStack() {
   return (

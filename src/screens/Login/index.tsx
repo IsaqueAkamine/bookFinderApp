@@ -1,5 +1,9 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {LoginScreenNavigationProp} from '../../routes/AuthStack';
+
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import {
   ButtonContainer,
@@ -14,15 +18,16 @@ import {
   SignUpText,
   Title,
 } from './styles';
-import Button from '../../components/Button';
 
 const Login: React.FC = () => {
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+
   const handleForgot = () => {
     console.log('forgot');
   };
 
   const handleSignUp = () => {
-    console.log('signup');
+    navigation.navigate('SignUp');
   };
 
   return (
