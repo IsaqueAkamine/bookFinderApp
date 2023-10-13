@@ -46,7 +46,7 @@ const Login: React.FC = () => {
           </ForgotContainer>
 
           <ButtonContainer>
-            <Button title="Sign In" />
+            <Button title="Sign In" icon="login" />
           </ButtonContainer>
 
           <NoAccountContainer>
