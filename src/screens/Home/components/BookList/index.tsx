@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 
-import {BookContainer, BookTitle} from './styles';
 import Pagination from './Pagination';
 import {
   Directions,
@@ -37,24 +36,6 @@ const VISIBLE_ITEMS = 3;
 
 const Book: React.FC = ({opacity, translateX, scale, item}) => {
   return (
-    // <BookContainer>
-    //   <BookTitle>{name}</BookTitle>
-    //   <Image
-    //     source={require('../../../../assets/img/books.jpg')}
-    //     style={[
-    //       {
-    //         width: ITEM_WIDTH,
-    //         height: ITEM_HEIGHT,
-    //       },
-    //     ]}
-    //   />
-    //   {/* <Pagination
-    //     currentIndex={currentPage}
-    //     totalPages={booklist.length}
-    //     onPressDot={handlePressDot}
-    //   /> */}
-    // </BookContainer>
-
     <Animated.View
       style={[
         styles.renderItem,
@@ -181,7 +162,7 @@ const BookList: React.FC = ({booklist}) => {
                 });
                 const scale = scrollXAnimated.interpolate({
                   inputRange,
-                  outputRange: [0.8, 1, 1.3],
+                  outputRange: [0.9, 1, 1.3],
                 });
                 const opacity = scrollXAnimated.interpolate({
                   inputRange,
