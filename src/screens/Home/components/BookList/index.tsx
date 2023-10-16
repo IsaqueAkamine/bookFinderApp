@@ -197,7 +197,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: SPACING * 2,
-    marginTop: 12,
   },
   renderItem: {
     position: 'absolute',

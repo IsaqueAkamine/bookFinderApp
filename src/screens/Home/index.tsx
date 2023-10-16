@@ -15,6 +15,8 @@ import CategoryList from './components/CategoryList';
 import BookList from './components/BookList';
 import {ScrollView} from 'react-native';
 import PopularList from './components/PopularList';
+import Input from '../../components/Input';
+import Search from '../../components/Search';
 
 const CATEGORYLIST = ['Novel', 'Psychology', 'Mystical', 'Educational'];
 const BOOKLIST = [
@@ -52,10 +54,10 @@ const Home: React.FC = () => {
   return (
     <SafeAreaContainer>
       <Container>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <HeaderContainer>
             <TextUser>Hi Razieh!</TextUser>
-            <TextUser>SEARCH INPUT</TextUser>
+            <Search placeholder="Search Title Book or Authors" />
           </HeaderContainer>
           {/* CATEGORY LIST */}
           <CategoryContainer>

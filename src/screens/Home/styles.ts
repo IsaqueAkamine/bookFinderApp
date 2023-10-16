@@ -12,10 +12,12 @@ export const Container = styled.View`
 
 export const HeaderContainer = styled.View`
   padding: 0 20px;
-  gap: 8px;
+  gap: 12px;
 `;
 
-export const CategoryContainer = styled.View``;
+export const CategoryContainer = styled.View`
+  margin-top: 10px;
+`;
 
 export const PopularContainer = styled.View`
   background-color: blueviolet;
