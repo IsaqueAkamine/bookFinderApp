@@ -3,8 +3,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Feather from 'react-native-vector-icons/Feather';
 
-import {Home} from '../screens';
+import {ExampleScreen} from '../screens';
 import {COLORS} from '../constants';
+import HomeStack from './HomeStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,9 +22,9 @@ const handleTabBarIcon = (route, color, size) => {
     case 'Favorites':
       iconName = 'heart';
       break;
-    // case 'Wallet':
-    //   iconName =  'wallet';
-    //   break;
+    case 'Account':
+      iconName = 'user';
+      break;
 
     default:
       iconName = 'home';
@@ -42,8 +43,8 @@ function HomeTab() {
         tabBarInactiveTintColor: 'gray',
       })}>
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarActiveTintColor: COLORS.primary,
           tabBarInactiveTintColor: 'gray',
@@ -53,9 +54,9 @@ function HomeTab() {
           },
         }}
       />
-      <Tab.Screen name="Downloads" component={Home} />
-      <Tab.Screen name="Favorites" component={Home} />
-      {/* <Tab.Screen name="Wallet" component={Home} /> */}
+      <Tab.Screen name="Downloads" component={ExampleScreen} />
+      <Tab.Screen name="Favorites" component={ExampleScreen} />
+      <Tab.Screen name="Account" component={ExampleScreen} />
     </Tab.Navigator>
   );
 }

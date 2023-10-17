@@ -38,7 +38,7 @@ const POPULARBOOKLIST = [
 
 const PopularCard = item => {
   return (
-    <CardContainer>
+    <CardContainer key={item.title}>
       <Image
         source={{uri: item.poster}}
         style={{width: width * 0.85, height: width * 1.3, borderRadius: 14}}
@@ -51,14 +51,6 @@ const PopularList: React.FC = () => {
   return (
     <Container>
       <Title>Popular</Title>
-      {/* <FlatList
-        data={POPULARBOOKLIST}
-        keyExtractor={(_, index) => String(index)}
-        renderItem={({item}) => {
-          return PopularCard(item);
-        }}
-        contentContainerStyle={{alignItems: 'center'}}
-      /> */}
       {POPULARBOOKLIST.map(item => PopularCard(item))}
     </Container>
   );

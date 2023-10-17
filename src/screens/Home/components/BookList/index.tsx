@@ -16,6 +16,8 @@ import {
   GestureHandlerRootView,
   State,
 } from 'react-native-gesture-handler';
+import {BookContainer} from './styles';
+import {useNavigation} from '@react-navigation/native';
 
 interface BookListProps {
   booklist: BookProps[];
@@ -34,23 +36,29 @@ const ITEM_WIDTH = width * 0.7;
 const ITEM_HEIGHT = ITEM_WIDTH * 1.4;
 const VISIBLE_ITEMS = 3;
 
-const Book: React.FC = ({opacity, translateX, scale, item}) => {
+const Book: React.FC = ({opacity, translateX, scale, item, selectedBook}) => {
+  const navigation = useNavigation();
+  const handleBookDetail = () => {
+    navigation.navigate('BookDetail', {book: selectedBook});
+  };
   return (
-    <Animated.View
-      style={[
-        styles.renderItem,
-        {
-          opacity,
-          transform: [
-            {
-              translateX,
-            },
-            {scale},
-          ],
-        },
-      ]}>
-      <Image source={{uri: item.poster}} style={styles.image} />
-    </Animated.View>
+    <BookContainer activeOpacity={0.8} onPress={handleBookDetail}>
+      <Animated.View
+        style={[
+          styles.renderItem,
+          {
+            opacity,
+            transform: [
+              {
+                translateX,
+              },
+              {scale},
+            ],
+          },
+        ]}>
+        <Image source={{uri: item.poster}} style={styles.image} />
+      </Animated.View>
+    </BookContainer>
   );
 };
 
@@ -85,10 +93,17 @@ const BookList: React.FC = ({booklist}) => {
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
   const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
   const [index, setIndex] = React.useState(0);
+  const [selectedBookIndex, setSelectedBookIndex] = React.useState(0);
   const setActiveIndex = React.useCallback(activeIndex => {
     scrollXIndex.setValue(activeIndex);
     setIndex(activeIndex);
+    setSelectedBookIndex(activeIndex);
   });
+
+  const selectedBookDetail = () => {
+    const selected = data[selectedBookIndex];
+    return selected;
+  };
 
   // React.useEffect(() => {
   //   if (index === data.length - VISIBLE_ITEMS - 1) {
@@ -175,6 +190,7 @@ const BookList: React.FC = ({booklist}) => {
                     translateX={translateX}
                     scale={scale}
                     item={item}
+                    selectedBook={selectedBookDetail()}
                   />
                 );
               }}
