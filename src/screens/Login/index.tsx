@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {LoginScreenNavigationProp} from '../../routes/AuthStack';
+import {useDispatch} from 'react-redux';
 
+import {Login as LoginAction} from '../../store/actions';
+
+import {LoginScreenNavigationProp} from '../../routes/AuthStack';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -21,6 +24,10 @@ import {
 
 const Login: React.FC = () => {
   const navigation = useNavigation<LoginScreenNavigationProp>();
+  const dispatch = useDispatch();
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleForgot = () => {
     console.log('forgot');
@@ -28,6 +35,10 @@ const Login: React.FC = () => {
 
   const handleSignUp = () => {
     navigation.navigate('SignUp');
+  };
+
+  const handleLogin = () => {
+    dispatch(LoginAction(username, password));
   };
 
   return (
@@ -43,15 +54,23 @@ const Login: React.FC = () => {
             description="username"
             maxLength={40}
             keyboardType="email-address"
+            value={username}
+            onChangeText={setUsername}
           />
-          <Input description="password" isPassword maxLength={40} />
+          <Input
+            description="password"
+            isPassword
+            maxLength={40}
+            value={password}
+            onChangeText={setPassword}
+          />
 
           <ForgotContainer onPress={handleForgot}>
             <ForgotText>Forgot password?</ForgotText>
           </ForgotContainer>
 
           <ButtonContainer>
-            <Button title="Sign In" icon="login" />
+            <Button title="Sign In" icon="login" onPress={handleLogin} />
           </ButtonContainer>
 
           <NoAccountContainer>

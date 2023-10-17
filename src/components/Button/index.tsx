@@ -10,9 +10,9 @@ interface ButtonProps extends TouchableOpacityProps {
   icon?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({title, icon = null}) => {
+const Button: React.FC<ButtonProps> = ({title, icon = null, ...rest}) => {
   return (
-    <Container activeOpacity={0.8}>
+    <Container activeOpacity={0.8} {...rest}>
       <Title>{title}</Title>
       {icon && <MaterialIcons name={icon} color={COLORS.white} size={24} />}
     </Container>
