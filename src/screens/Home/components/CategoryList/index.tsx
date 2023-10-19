@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -19,7 +19,7 @@ const Category: React.FC<CategoryProps> = ({category, index}) => {
   const {selectedCategory: selectedCategoryReducer} = useSelector(
     state => state.HomeReducer,
   );
-  console.log('selectedCategoryReducer => ', selectedCategoryReducer);
+  // console.log('selectedCategoryReducer => ', selectedCategoryReducer);
 
   const handleSelectedCategory = () => {
     dispatch(selectedCategory(index));
@@ -40,6 +40,7 @@ const CategoryList: React.FC<CategoryListProps> = ({categorylist}) => {
       data={categorylist}
       renderItem={({item, index}) => <Category category={item} index={index} />}
       horizontal
+      showsHorizontalScrollIndicator={false}
       contentContainerStyle={{
         gap: 12,
         paddingHorizontal: 20,

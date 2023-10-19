@@ -2,6 +2,7 @@ import HomeActionType from './action-types';
 
 const initialState = {
   selectedCategory: 0,
+  isLoading: true,
 };
 
 type HomeProps = {
@@ -15,6 +16,12 @@ const HomeReducer = (state = initialState, action: HomeProps) => {
       return {
         ...state,
         selectedCategory: action.payload,
+      };
+    }
+    case HomeActionType.IS_LOADING: {
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     }
     default:

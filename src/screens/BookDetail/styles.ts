@@ -8,7 +8,7 @@ import {COLORS} from '../../constants';
 
 const {width, height} = Dimensions.get('window');
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${COLORS.background};
 `;
@@ -157,6 +157,7 @@ export const AuthorInfoContainer = styled.View`
 
 export const AuthorName = styled.Text`
   font-size: 16px;
+  max-width: 300px;
   color: ${COLORS.primary};
 `;
 

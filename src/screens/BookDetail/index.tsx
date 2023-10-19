@@ -54,7 +54,10 @@ const BookDetail: React.FC = () => {
 
   return (
     <Container>
-      <Image source={{uri: book.poster}}>
+      <Image
+        source={{
+          uri: 'https' + book.volumeInfo.imageLinks.thumbnail.substr(4),
+        }}>
         {/* HEADER ICONS */}
         <HeaderContainer>
           <IconButton onPress={handleBackNavigation}>
@@ -74,7 +77,7 @@ const BookDetail: React.FC = () => {
             <Title>{book.title}</Title>
             <RatingContainer>
               <RatingText>5.2</RatingText>
-              <RatingText>, 1037 Pages, 1936</RatingText>
+              <RatingText>, {book.volumeInfo.pageCount} Pages</RatingText>
             </RatingContainer>
           </InfoContainer>
         </BlurContainer>
@@ -83,12 +86,16 @@ const BookDetail: React.FC = () => {
       <BodyContainer>
         {/* INFO CATEGORY */}
         <InfoCategoryContainer>
-          <CategoryContainer>
-            <CategoryText>Novel</CategoryText>
-          </CategoryContainer>
-          <CategoryContainer>
+          {book.volumeInfo.categories.map((category, index) => {
+            return (
+              <CategoryContainer key={String(index)}>
+                <CategoryText>{category}</CategoryText>
+              </CategoryContainer>
+            );
+          })}
+          {/* <CategoryContainer>
             <CategoryText>Romantic</CategoryText>
-          </CategoryContainer>
+          </CategoryContainer> */}
         </InfoCategoryContainer>
 
         {/* ACTION SECTION */}
@@ -109,21 +116,23 @@ const BookDetail: React.FC = () => {
 
         {/* AUTHOR SECTION */}
         <AuthorContainer>
-          <AuthorImage source={{uri: book.poster}} />
+          <AuthorImage
+            source={{
+              uri: 'https' + book.volumeInfo.imageLinks.thumbnail.substr(4),
+            }}
+            resizeMode="cover"
+          />
           <AuthorInfoContainer>
-            <AuthorName>Margaret Mitchell</AuthorName>
+            <AuthorName numberOfLines={1} ellipsizeMode="tail">
+              {book.volumeInfo.authors?.join(', ')}
+            </AuthorName>
             <AuthorInfoText>Authors</AuthorInfoText>
           </AuthorInfoContainer>
         </AuthorContainer>
 
         {/* BOOK INFO SECTION */}
         <BookInfoContainer>
-          <BookDescription>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro, ea
-            iusto. Minima rerum consequuntur corporis ex ullam dicta repudiandae
-            odit natus voluptatibus consectetur. Cum labore, atque sapiente
-            commodi ad ex.
-          </BookDescription>
+          <BookDescription>{book.volumeInfo.description}</BookDescription>
         </BookInfoContainer>
       </BodyContainer>
     </Container>

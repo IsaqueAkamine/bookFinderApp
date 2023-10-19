@@ -37,10 +37,13 @@ const ITEM_HEIGHT = ITEM_WIDTH * 1.4;
 const VISIBLE_ITEMS = 3;
 
 const Book: React.FC = ({opacity, translateX, scale, item, selectedBook}) => {
+  // console.log('BOOK => ', item.volumeInfo.imageLinks.smallThumbnail);
+
   const navigation = useNavigation();
   const handleBookDetail = () => {
     navigation.navigate('BookDetail', {book: selectedBook});
   };
+
   return (
     <BookContainer activeOpacity={0.8} onPress={handleBookDetail}>
       <Animated.View
@@ -56,7 +59,14 @@ const Book: React.FC = ({opacity, translateX, scale, item, selectedBook}) => {
             ],
           },
         ]}>
-        <Image source={{uri: item.poster}} style={styles.image} />
+        <Image
+          // source={{uri: item.volumeInfo.imageLinks.thumbnail}}
+          source={{
+            uri: 'https' + item.volumeInfo.imageLinks.thumbnail.substr(4),
+          }}
+          style={styles.image}
+          resizeMode="cover"
+        />
       </Animated.View>
     </BookContainer>
   );
@@ -74,11 +84,16 @@ const OverflowItems = ({data, scrollXAnimated}) => {
         {data.map((item, index) => {
           return (
             <View key={index} style={styles.itemContainer}>
-              <Text style={[styles.title]} numberOfLines={1}>
-                {item.title}
+              <Text
+                style={[styles.title]}
+                numberOfLines={1}
+                ellipsizeMode="tail">
+                {item.volumeInfo.title}
               </Text>
               <View style={styles.itemContainerRow}>
-                <Text style={[styles.date]}>{item.date}</Text>
+                <Text style={[styles.date]}>
+                  {item.volumeInfo.publishedDate}
+                </Text>
               </View>
             </View>
           );
@@ -89,7 +104,7 @@ const OverflowItems = ({data, scrollXAnimated}) => {
 };
 
 const BookList: React.FC = ({booklist}) => {
-  const [data, setData] = React.useState(booklist);
+  const [data, setData] = React.useState(booklist.items);
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
   const scrollXAnimated = React.useRef(new Animated.Value(0)).current;
   const [index, setIndex] = React.useState(0);
@@ -147,7 +162,7 @@ const BookList: React.FC = ({booklist}) => {
           }}>
           <View style={{flex: 1}}>
             <FlatList
-              data={booklist}
+              data={data}
               keyExtractor={(_, index) => String(index)}
               horizontal
               inverted
@@ -220,7 +235,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: ITEM_WIDTH,
+    maxWidth: ITEM_WIDTH,
     height: ITEM_HEIGHT,
+    maxHeight: ITEM_HEIGHT,
     borderRadius: 14,
   },
   title: {
@@ -228,6 +245,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     textTransform: 'uppercase',
     letterSpacing: -1,
+    maxWidth: ITEM_WIDTH,
   },
   location: {
     fontSize: 16,
