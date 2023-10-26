@@ -13,13 +13,14 @@ import {
 
 import CategoryList from './components/CategoryList';
 import BookList from './components/BookList';
-import {ScrollView} from 'react-native';
+import {ActivityIndicator, ScrollView} from 'react-native';
 import PopularList from './components/PopularList';
 import Input from '../../components/Input';
 import Search from '../../components/Search';
 import api from '../../services/api';
 import {useDispatch, useSelector} from 'react-redux';
 import {Loading} from '../../store/home/action';
+import {COLORS} from '../../constants';
 
 // const CATEGORYLIST = ['Novel', 'Psychology', 'Mystical', 'Educational'];
 // const BOOKLIST = [
@@ -98,15 +99,18 @@ const Home: React.FC = () => {
             <TextUser>Hi Razieh!</TextUser>
             <Search placeholder="Search Title Book or Authors" />
           </HeaderContainer>
+
           {/* CATEGORY LIST */}
-          {!isLoading && (
-            <CategoryContainer>
-              <CategoryList categorylist={CATEGORYLIST} />
-            </CategoryContainer>
-          )}
+          <CategoryContainer>
+            <CategoryList categorylist={CATEGORYLIST} />
+          </CategoryContainer>
 
           {/* BOOK LIST */}
-          {!isLoading && <BookList booklist={bookList} />}
+          {isLoading ? (
+            <ActivityIndicator size="large" color={COLORS.primary} />
+          ) : (
+            <BookList booklist={bookList} />
+          )}
 
           <PopularList />
         </ScrollView>
