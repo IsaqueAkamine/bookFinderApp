@@ -53,7 +53,7 @@ const BookDetail: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container showsVerticalScrollIndicator={false}>
       <Image
         source={{
           uri: 'https' + book.volumeInfo.imageLinks.thumbnail.substr(4),
