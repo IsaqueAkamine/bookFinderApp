@@ -15,7 +15,7 @@ export const Init = () => {
 export const Login = (username, password) => {
   return async dispatch => {
     let token = null;
-    if (username === 'User' && password === '1234') {
+    if (username === 'Isaqueakamine@gmail.com' && password === '123456') {
       token = username + password;
       await AsyncStorage.setItem('token', token);
     }

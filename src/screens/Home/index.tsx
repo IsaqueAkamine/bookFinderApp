@@ -106,11 +106,16 @@ const Home: React.FC = () => {
           </CategoryContainer>
 
           {/* BOOK LIST */}
-          {isLoading ? (
+          {/* {isLoading ? (
             <ActivityIndicator size="large" color={COLORS.primary} />
           ) : (
             <BookList booklist={bookList} />
+          )} */}
+
+          {isLoading && (
+            <ActivityIndicator size="large" color={COLORS.primary} />
           )}
+          {bookList && <BookList booklist={bookList} />}
 
           <PopularList />
         </ScrollView>
