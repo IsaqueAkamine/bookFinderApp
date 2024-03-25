@@ -96,7 +96,7 @@ const Home: React.FC = () => {
       <Container>
         <ScrollView showsVerticalScrollIndicator={false}>
           <HeaderContainer>
-            <TextUser>Hi Razieh!</TextUser>
+            <TextUser>Hi Isaque!</TextUser>
             <Search placeholder="Search Title Book or Authors" />
           </HeaderContainer>
 
